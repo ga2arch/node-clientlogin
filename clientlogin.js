@@ -14,8 +14,7 @@
       this.accountType = accountType;
     }
     ClientLogin.prototype.authorize = function(callback) {
-      var options, postData, req, self;
-      self = this;
+      var options, postData, req;
       postData = querystring.stringify({
         'Email': this.username,
         'Passwd': this.password,
@@ -40,9 +39,10 @@
           return data += chuck;
         });
         return res.on('end', function() {
-          self.sid = data.split('SID=')[1].split('Auth')[0];
-          self.authToken = data.split('Auth=')[1];
-          return callback();
+          var auth, sid;
+          sid = data.split('SID=')[1].split('Auth')[0];
+          auth = data.split('Auth=')[1];
+          return callback(sid, auth);
         });
       });
       req.write(postData);

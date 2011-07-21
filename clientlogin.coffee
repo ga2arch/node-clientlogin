@@ -10,7 +10,6 @@ class ClientLogin
 		@accountType = accountType
 		
 	authorize: (callback) ->
-		self = @
 		postData = querystring.stringify({
 			'Email': @username,
 			'Passwd': @password,
@@ -29,9 +28,9 @@ class ClientLogin
 				data += chuck
 				
 			res.on 'end', ->
-				self.sid = data.split('SID=')[1].split('Auth')[0]
-				self.authToken = data.split('Auth=')[1]
-				callback()
+				sid = data.split('SID=')[1].split('Auth')[0]
+				auth = data.split('Auth=')[1]
+				callback(sid, auth)
 				
 		req.write postData
 		req.end()
