@@ -29,7 +29,7 @@ class ClientLogin
                 
             res.on 'end', ->
                 sid = data.split('SID=')[1].split('LSID=')[0]
-                lisd = data.split('LSID=')[1].split('Auth=')[0]
+                lsid = data.split('LSID=')[1].split('Auth=')[0]
                 auth = data.split('Auth=')[1]
                 callback(sid, lsid, auth)
                 

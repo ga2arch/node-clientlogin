@@ -38,9 +38,9 @@ ClientLogin = (function() {
         return data += chuck;
       });
       return res.on('end', function() {
-        var auth, lisd, sid;
+        var auth, lsid, sid;
         sid = data.split('SID=')[1].split('LSID=')[0];
-        lisd = data.split('LSID=')[1].split('Auth=')[0];
+        lsid = data.split('LSID=')[1].split('Auth=')[0];
         auth = data.split('Auth=')[1];
         return callback(sid, lsid, auth);
       });
